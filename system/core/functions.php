@@ -1,11 +1,8 @@
 <?php
 
-
-/*
- *
- * LOAD LIBRARY
- *
- */
+//
+// LOAD LIBRARY
+// 
 if ( ! function_exists('load_library'))
 {
     function load_library($library_name)
@@ -13,29 +10,23 @@ if ( ! function_exists('load_library'))
         // LOOK FOR APPLICATION LIBRARY FIRST
         $path_to_file = SITE_ROOT . '/app/' . APP . '/libraries/' . $library_name . '.php';
         if (file_exists($path_to_file))
-        {
             return _load_class($library_name, $path_to_file);
-        }
         
         // TRY SYSTEM LIBRARY
         $path_to_file = SITE_ROOT . '/system/libraries/' . $library_name . '.php';
         if (file_exists($path_to_file))
-        {
             return _load_class($library_name, $path_to_file);
-        }
         
-        // OR, LIBRARY CLASS DOESN'T EXIST
+        // LIBRARY CLASS DOESN'T EXIST
         return FALSE;
     }
 }
 
 
 
-/*
- *
- * LOAD HELPER
- *
- */
+// 
+// LOAD HELPER
+//
 if ( ! function_exists('load_helper'))
 {
     function load_helper($helper_name, $return_instance = FALSE)
@@ -56,17 +47,16 @@ if ( ! function_exists('load_helper'))
             return $return_instance ? new $helper_name() : TRUE;
         }
         
+        // NO HELPER FOUND
         return FALSE;
     }
 }
 
 
 
-/*
- *
- * LOAD CONTROLLER
- *
- */
+//
+// LOAD CONTROLLER
+//
 if ( ! function_exists('load_controller'))
 {
     function load_controller($controller_name)
@@ -74,44 +64,33 @@ if ( ! function_exists('load_controller'))
         // TRY MY_MODULE CONTROLLER
         $path = SITE_ROOT . '/app/my_modules/' . $controller_name . '/' . APP . '/' . $controller_name . '.controller.php';
         if (file_exists($path))
-        {
             return _load_class($controller_name, $path);
-        }
         
         // TRY MODULE CONTROLLER 
         $path = SITE_ROOT . '/app/modules/' . $controller_name . '/' . APP . '/' . $controller_name . '.controller.php';
         if (file_exists($path))
-        {
             return _load_class($controller_name, $path);
-        }
         
         // TRY APPLICATION CONTROLLER
         $path = SITE_ROOT . '/app/' . APP . '/controllers/' . $controller_name . '.controller.php';
         if (file_exists($path))
-        {   
             return _load_class($controller_name, $path);
-        }
         
         // TRY SYSTEM MODULE CONTROLLER
         $path = SITE_ROOT . '/app/modules/' . $controller_name . '/' . APP . '/' . $controller_name . '.controller.php';
         if (file_exists($path))
-        {
             return _load_class($controller_name, $path);
-        }
         
-        // CONTROLLER DOESN'T EXIST
+        // NO CONTROLLER FOUND
         return FALSE;
     }
 }
 
 
 
-
-/*
- *
- * LOAD MODEL
- *
- */
+//
+// LOAD MODEL
+//
 if ( ! function_exists('load_model')) 
 {
     function load_model($model_name)
@@ -119,36 +98,28 @@ if ( ! function_exists('load_model'))
         // TRY MY_MODULE MODEL
         $path = SITE_ROOT . '/app/my_modules/' . $model_name . '/' . $model_name. '.model.php';
         if (file_exists($path)) 
-        {
             return _load_class($model_name . '_model', $path);
-        }
         
         // TRY APP MODULE MODEL
         $path = SITE_ROOT . '/app/modules/' . $model_name . '/' . $model_name . '.model.php';
         if (file_exists($path))
-        {
             return _load_class($model_name . '_model', $path);
-        }
         
         // TRY APP MODEL
         $path = SITE_ROOT . '/app/' . APP . '/models/' . $model_name . '.model.php';
         if (file_exists($path)) 
-        {
             return _load_class($model_name . '_model', $path);
-        }
         
-        // MODEL DOESN'T EXISTS
+        // NO MODEL FOUND
         return FALSE;
     }
 }
 
 
 
-/*
- *
- * LOAD CORE CLASS
- *
- */
+//
+// LOAD CORE CLASS
+//
 if ( ! function_exists('load_core'))
 {
     function load_core($class_name)
@@ -156,29 +127,23 @@ if ( ! function_exists('load_core'))
         // SYSTEM CLASS
         $path = SITE_ROOT . '/system/core/' . $class_name . '.php';
         if (file_exists($path))
-        {
             return _load_class($class_name, $path);
-        }
         
         // APP CLASS
         $path = SITE_ROOT . '/app/' . APP . '/core/' . $class_name . '.php';
         if (file_exists($path))
-        {
             return _load_class($class_name, $path);
-        }
         
-        // CORE CLASS DOESN'T EXIST
+        // CORE CLASS NOT FOUND
         return FALSE;
     }
 }
 
 
 
-/*
- *
- * LOAD VIEW
- *
- */
+//
+// LOAD VIEW
+//
 if ( ! function_exists('load_view'))
 {
     function load_view($view, $vars = array())
@@ -194,55 +159,42 @@ if ( ! function_exists('load_view'))
         // SKIN TEMPLATE
         $path = SITE_ROOT . '/skins/' . APP . '/' . $skin . '/' . $view;
         if (file_exists($path))
-        {
             return _return_view($path, $vars);
-        }
         
         // MY MODULE TEMPLATE
         $path = SITE_ROOT . '/app/my_modules/' . $module . '/' . APP . '/templates/' . $view;
         if (file_exists($path))
-        {
             return _return_view($path, $vars);
-        }
         
         // MODULE TEMPLATE
         $path = SITE_ROOT . '/app/modules/' . $module . '/' . APP . '/templates/' . $view;
         if (file_exists($path))
-        {
             return _return_view($path, $vars);
-        }
         
         // APP TEMPLATE
         $path = SITE_ROOT . '/app/' . APP . '/templates/' . $view;
         if (file_exists($path))
-        {
             return _return_view($path, $vars);
-        }
         
         // TRY MY MODULE TEMPLATE WITH A LONG PATH
         $path = SITE_ROOT . '/app/my_modules/' . $view;
         if (file_exists($path))
-        {
             return _return_view($path, $vars);
-        }
         
         // TRY MODULE TEMPLATE WITH A LONG PATH
         $path = SITE_ROOT . '/app/modules/' . $view;
         if (file_exists($path))
-        {
             return _return_view($path, $vars);
-        }
         
         return 'View not found: ' . $view;
     }
 }
 
 
-/*
- *
- * RETURN CONTENTS OF TEMPLATE FILE
- *
- */
+
+//
+// RETURN CONTENTS OF TEMPLATE FILE
+//
 if ( ! function_exists('_return_view'))
 {
     function _return_view($path, $vars)
@@ -258,11 +210,9 @@ if ( ! function_exists('_return_view'))
 }
 
 
-/*
- *
- * LOAD CLASS
- *
- */
+//
+// LOAD CLASS INTO SYSTEM
+//
 if ( ! function_exists('_load_class'))
 {
     function _load_class($class_name, $path)
@@ -291,36 +241,26 @@ if ( ! function_exists('_load_class'))
 }
 
 
-
-/*
- *
- * KEEPS TRACK OF WHICH CLASSES HAVE BEEN LOADED
- *
- */
+//
+// KEEPS TRACK OF WHICH CLASSES HAVE BEEN LOADED
+//
 if ( ! function_exists('is_loaded'))
 {
-    function is_loaded($class = '')
+    function is_loaded($class)
     {
         static $_is_loaded = array();
         
-        if ($class != '')
-        {
+        if ($class)
             $_is_loaded[$class] = $class;
-        }
         
         return $_is_loaded;
     }
 }
 
 
-
-
-
-/*
- *
- * TESTS IF THIS REQUEST IS ASYNCHRONOUS JAVASCRIPT REQUEST
- *
- */
+//
+// TESTS IF THIS REQUEST IS ASYNCHRONOUS JAVASCRIPT REQUEST
+//
 if ( ! function_exists('is_ajax_request'))
 {
     function is_ajax_request()
@@ -339,12 +279,9 @@ if ( ! function_exists('is_ajax_request'))
 }
 
 
-
-/*
- *
- * LOAD ERROR PAGE
- *
- */
+//
+// LOAD ERROR PAGE
+//
 if ( ! function_exists('error_page'))
 {
     function error_page($type = 'page_not_found')
@@ -360,26 +297,25 @@ if ( ! function_exists('error_page'))
         {
             $error_controller->forbidden();
         }
+        
         else 
         {
             $error_controller->page_not_found();
         }
+        
         exit;
     }
 }
 
 
-
-/*
- *
- * AUTO LOAD FOR CORE CLASSES
- *
- */
+//
+// AUTO LOAD FOR CORE CLASSES
+//
 if ( ! function_exists('__autoload'))
 {
     function __autoload($class_name) 
     {
-        // APP CORE CLASSES
+        // APP CORE CLASS
         $path = SITE_ROOT . '/app/' . APP . '/core/' . $class_name . '.php';
         if (file_exists($path)) 
         {

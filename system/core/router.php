@@ -1,11 +1,14 @@
 <?php
 
-class router extends controller
+class router
 {
+
+private $registry;
     
 public function __construct()
-    {
-        parent::__construct();
+    {   
+        // LOAD REGISTRY
+        $this->registry = load_core('registry');
         
         // TURN URL INTO CONTROLLER, ACTION, ARGS 
         $this->_parse_url();
@@ -63,16 +66,13 @@ public function route()
         // LOAD CONTROLLER CLASS
         $controller = load_controller($this->registry->controller);
         if ( ! $controller)
-        {
             error_page();
-        }
         
         // RUN CONTROLLER ACTION
         $action = $this->registry->action;
         if ( ! method_exists($controller, $action))
-        {
             error_page();
-        }
+            
         $controller->$action();
     }
 

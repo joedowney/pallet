@@ -1,8 +1,9 @@
 <?php
 
-class image {
+class image 
+{
 
-    public static function add_image($filepath, $current_params = array(), $thumb_params = array())
+public static function add_image($filepath, $current_params = array(), $thumb_params = array())
     {
         if ( ! file_exists($filepath))
         {

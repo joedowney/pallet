@@ -2,7 +2,8 @@
 
 class controller
 {
-    protected $content;
+    
+protected $content;
     
 public function __construct()
     {
@@ -21,14 +22,10 @@ public function display()
     {
         // VIEW HASN'T BEEN ASSIGNED YET
         if ( ! isset($this->content))
-        {
             exit ('Content not loaded');
-        }
         
         // OUTPUT CONTENTS OF VIEW
         else
-        {
             echo load_view($this->main_template, array('content'=>$this->content));
-        }
     }
 }

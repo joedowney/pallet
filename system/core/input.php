@@ -12,9 +12,7 @@ public function __construct()
     {
         // DISABLE MAGIC QUOTES
         if (get_magic_quotes_gpc())
-        {
             $this->_strip();
-        }
         
         // INTERNALIZE GLOBAL REQUEST VARS
         $this->_post    = $_POST;
@@ -24,9 +22,9 @@ public function __construct()
         $this->_session = $_SESSION;
         
         // CLEAR OUT GLOBAL REQUEST VARS
-        $_POST = array();
-        $_GET = array();
-        $_COOKIE = array();
+        $_POST    = array();
+        $_GET     = array();
+        $_COOKIE  = array();
         $_REQUEST = array();
         
     }

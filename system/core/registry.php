@@ -3,13 +3,13 @@
 class registry
 {
     
-	public $js = array();
-	public $css = array();
-	public $action;
-	public $controller;
-	public $meta_title;
-	public $meta_keywords;
-	public $meta_description;
+public $js = array();
+public $css = array();
+public $action;
+public $controller;
+public $meta_title;
+public $meta_keywords;
+public $meta_description;
     
 public function __construct()
     {

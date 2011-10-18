@@ -2,9 +2,10 @@
 
 class image_resizer
 {
-    private $img;
     
-    function __construct($img_file) 
+private $img;
+    
+function __construct($img_file) 
     {
     
     	//detect image format
@@ -49,12 +50,12 @@ class image_resizer
     	
     }
     
-    function set_jpeg_quality($q = 90) 
+function set_jpeg_quality($q = 90) 
     {
     	$this->img['quality'] = $q;
     }
     
-    function resize_by_height($height = 100) 
+function resize_by_height($height = 100) 
     {
     	if ($height < $this->img['orig_height']) 
     	{
@@ -64,7 +65,7 @@ class image_resizer
     	}
     }
     
-    function resize_by_width($width = 100) 
+function resize_by_width($width = 100) 
     {
     	if ($width < $this->img['orig_width']) 
     	{
@@ -76,10 +77,10 @@ class image_resizer
     
     
     
-    // 
-    // RESIZE THE IMAGE ACCORDING TO WHICH DIMENSION IS LONGER
-    //
-    function resize_auto($length = 100) 
+
+ESIZE THE IMAGE ACCORDING TO WHICH DIMENSION IS LONGER
+
+tion resize_auto($length = 100) 
     {
     	if($this->img['orig_height'] > $length || $this->img['orig_width'] > $length) 
     	{
@@ -97,10 +98,10 @@ class image_resizer
     
     
     
-    //
-    // RESIZE THE IMAGE ACCORDING TO WHICH DIMENSION IS SHORTER
-    //
-    function resize_reverse_auto($length = 100) 
+//
+// RESIZE THE IMAGE ACCORDING TO WHICH DIMENSION IS SHORTER
+//
+function resize_reverse_auto($length = 100) 
     {
     	if($this->img['orig_height'] > $length || $this->img['orig_width'] > $length) 
     	{
@@ -117,10 +118,10 @@ class image_resizer
     
     
     
-    // 
-    // RESIZE THE IMAGE TO FIT WITHIN THE BOUNDARIES OF THE GIVEN DIMENSIONS
-    //
-    function resize_by_ratio($width, $height) 
+// 
+// RESIZE THE IMAGE TO FIT WITHIN THE BOUNDARIES OF THE GIVEN DIMENSIONS
+//
+function resize_by_ratio($width, $height) 
     {
     	$ratio = $width / $height;
     	$img_ratio = $this->img['orig_width'] / $this->img['orig_height'];
@@ -136,11 +137,11 @@ class image_resizer
     
     
     
-    //
-    // RESIZE THE IMAGE TO BE NOT NOT SMALLER THAN 
-    // EITHER OF THE GIVEN DIMENSIONS
-    //
-    function resize_reverse_ratio($width, $height) 
+//
+// RESIZE THE IMAGE TO BE NOT NOT SMALLER THAN 
+// EITHER OF THE GIVEN DIMENSIONS
+//
+function resize_reverse_ratio($width, $height) 
     {
     	$ratio = $width / $height;
     	$img_ratio = $this->img['orig_width'] / $this->img['orig_height'];
@@ -156,10 +157,10 @@ class image_resizer
     
     
     
-    //
-    // OUTPUT NEW IMAGE
-    //
-    function show() 
+//
+// OUTPUT NEW IMAGE
+//
+function show() 
     {
     	header("Content-Type: image/".$this->img["format"]);
     	$this->img['des'] = @imagecreatetruecolor($this->img['new_width'], $this->img['new_height'])
@@ -186,11 +187,11 @@ class image_resizer
     
     
     
-    //
-    // SAVE NEW IMAGE
-    // if the path ($save) is left blank, this will overwrite the original file
-    //
-    function save($save="")
+//
+// SAVE NEW IMAGE
+// if the path ($save) is left blank, this will overwrite the original file
+//
+function save($save="")
     {
     	//save thumb
     	if (empty($save)) 

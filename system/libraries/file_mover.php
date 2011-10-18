@@ -2,14 +2,15 @@
 
 class file_mover
 {
-    public function move($file_path, $new_directory)
+    
+public function move($file_path, $new_directory)
     {
         $new_file = $this->copy($file_path, $new_directory);
         unlink($file_path);
         return $new_file;
     }
     
-    public function copy($file_path, $new_directory)
+public function copy($file_path, $new_directory)
     {
     
         // TRIM TRAILING SLASH FROM $new_directory
