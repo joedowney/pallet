@@ -15,9 +15,9 @@ RewriteRule ^(.*)$ index.php?req=$1 [L,QSA]
 # ----------------------------------------------------------------------
 # INCREASE PHP UPLOAD LIMIT
 # ----------------------------------------------------------------------
-# php_value post_max_size 30M
-# php_value upload_max_filesize 30M
-# php_value max_execution_time 6000000
+php_value post_max_size 30M
+php_value upload_max_filesize 30M
+php_value max_execution_time 6000000
 
 # ----------------------------------------------------------------------
 # Better website experience for IE users (github.com/rails/rails/commit/123eb25#commitcomment-118920)
@@ -208,19 +208,6 @@ AddType text/x-vcard                   vcf
 FileETag None
 
 # ----------------------------------------------------------------------
-# Stop screen flicker in IE on CSS rollovers
-# ----------------------------------------------------------------------
-
-# The following directives stop screen flicker in IE on CSS rollovers - in
-# combination with the "ExpiresByType" rules for images (see above). If
-# needed, un-comment the following rules.
-
-# BrowserMatch "MSIE" brokenvary=1
-# BrowserMatch "Mozilla/4.[0-9]{2}" brokenvary=1
-# BrowserMatch "Opera" !brokenvary
-# SetEnvIf brokenvary 1 force-no-vary
-
-# ----------------------------------------------------------------------
 # UTF-8 encoding
 # ----------------------------------------------------------------------
 
@@ -229,3 +216,34 @@ AddDefaultCharset utf-8
 
 # Force UTF-8 for a number of file formats
 AddCharset utf-8 .html .css .js .xml .json .rss .atom
+
+# ----------------------------------------------------------------------
+# A little more security
+# ----------------------------------------------------------------------
+# Do we want to advertise the exact version number of Apache we're running?
+# Probably not.
+# ServerTokens Prod
+
+# "-Indexes" will have Apache block users from browsing folders without a default document
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# Block access to "hidden" directories whose names begin with a period. 
+<IfModule mod_rewrite.c>
+  RewriteCond %{SCRIPT_FILENAME} -d
+	RewriteCond %{SCRIPT_FILENAME} -f
+  RewriteRule "(^|/)\." - [F]
+</IfModule>
+
+# Block access to backup and source files
+<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|~|swp)$">
+  Order allow,deny
+  Deny from all
+  Satisfy All
+</FilesMatch>
+
+# Increase cookie security
+<IfModule php5_module>
+  php_value session.cookie_httponly true
+</IfModule>

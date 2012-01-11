@@ -246,7 +246,7 @@ if ( ! function_exists('_load_class'))
 //
 if ( ! function_exists('is_loaded'))
 {
-    function is_loaded($class)
+    function is_loaded($class = false)
     {
         static $_is_loaded = array();
         

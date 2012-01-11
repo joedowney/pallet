@@ -78,9 +78,9 @@ function resize_by_width($width = 100)
     
     
 
-ESIZE THE IMAGE ACCORDING TO WHICH DIMENSION IS LONGER
+// RESIZE THE IMAGE ACCORDING TO WHICH DIMENSION IS LONGER
 
-tion resize_auto($length = 100) 
+function resize_auto($length = 100) 
     {
     	if($this->img['orig_height'] > $length || $this->img['orig_width'] > $length) 
     	{
