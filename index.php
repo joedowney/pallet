@@ -17,3 +17,5 @@ include(SITE_ROOT . '/system/core/init.php');
 
 // GO
 $router->route();
+
+// Hello
