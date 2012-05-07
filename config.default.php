@@ -2,6 +2,9 @@
 
 if ( ! defined('APP')) exit; 
 
+// SET TIMEZONE
+date_default_timezone_set('America/New_York');
+
 // DATABASE SETTINGS
 define('DB_HOST', '');
 define('DB_USER', '');
